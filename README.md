@@ -51,3 +51,6 @@ Example:
 let weatherSync = new Weather("97c33b241d27cwf15c75abb12628ed9e", "Los Angeles", "US");
 ```
 
+## Authors
+
+* ** Alessandro Lion (t4styy)** - *Initial work* - [t4styy](https://github.com/tastydev)
