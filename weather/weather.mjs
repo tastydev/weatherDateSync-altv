@@ -71,7 +71,7 @@ export default class Weather {
                     this.setDate(player);
                 });
             }
-        }, 66000); //66000ms = 1.1 minutes -> every 1.1 minutes the date is synced
+        }, 3000); //3000ms = 3 seconds -> every 3 second the date is synced
         this.interval = setInterval(()=>this.initWeatherData(), 900000); //900000ms = 15 minutes
     }
 
