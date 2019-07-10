@@ -1,6 +1,6 @@
 # WeatherDateSync Resource
 
-WeatherDateSync resource for altV:Multiplayer (GTA5).
+WeatherDateSync resource for alt:V Multiplayer (GTA5).
 
 This resource syncs real weather of citys to the game.
 
@@ -11,7 +11,7 @@ These commands are directly usable in the server cmd prompt
 stopWeather // Stop the sync, should only be used if something is broken 
 ```
 ```
-startWeather // Stat the Sync, should only be used if something is broken 
+startWeather // Start the Sync, should only be used if something is broken 
 ```
 ```
 currentTemp //Prints the current temperature in Celsius (Useless currently)
