@@ -4,7 +4,7 @@ import fetch from 'node-fetch';
 
 export default class Weather {
     constructor(apiKey, city, countryCode) {
-        alt.log('RealWeatherTimeSync: started');
+        alt.log('~g~RealWeatherTimeSync: started');
         this.apiKey = apiKey;
         this.city = city;
         this.url = 'https://api.openweathermap.org/data/2.5/weather?q='+this.city+','+this.countryCode+'&appid='+this.apiKey;
@@ -21,6 +21,7 @@ export default class Weather {
 
     registerEvents() {
         alt.on('playerConnect', (player) => {
+            alt.emitClient(player, 'disableClock');
             player.setWeather(this.currentWeatherType);
             this.setDate(player);
         });
@@ -71,7 +72,7 @@ export default class Weather {
                     this.setDate(player);
                 });
             }
-        }, 3000); //3000ms = 3 seconds -> every 3 second the date is synced
+        }, 3000); //3000ms = 3 seconds -> every 3 seconds the date is synced
         this.interval = setInterval(()=>this.initWeatherData(), 900000); //900000ms = 15 minutes
     }
 
