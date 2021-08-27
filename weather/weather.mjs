@@ -10,10 +10,8 @@ export default class Weather {
         this.url = 'https://api.openweathermap.org/data/2.5/weather?q='+this.city+','+this.countryCode+'&appid='+this.apiKey;
         this.countryCode = countryCode;
         this.interval = null;
-        this.dateInterval = null;
         this.currentWeatherData = {};
         this.currentWeatherType = 0;
-        this.currentDate = new Date();
         this.registerEvents();
         this.init();
         this.initWeatherData();
@@ -21,7 +19,6 @@ export default class Weather {
 
     registerEvents() {
         alt.on('playerConnect', (player) => {
-            alt.emitClient(player, 'disableClock');
             player.setWeather(this.currentWeatherType);
             this.setDate(player);
         });
@@ -65,30 +62,21 @@ export default class Weather {
     }
 
     init(){
-        this.dateInterval = setInterval(()=> {
-            if(alt.Player.all.length !== 0){
-                this.currentDate = new Date();
-                alt.Player.all.forEach((player)=>{
-                    this.setDate(player);
-                });
-            }
-        }, 3000); //3000ms = 3 seconds -> every 3 seconds the date is synced
         this.interval = setInterval(()=>this.initWeatherData(), 900000); //900000ms = 15 minutes
     }
 
      syncNewData(){
         if(alt.Player.all.length !== 0){
-            this.currentDate = new Date();
             alt.Player.all.forEach((player)=>{
                 player.setWeather(this.currentWeatherType);
-                this.setDate(player);
             });
         }
     }
 
     setDate(player){
-        player.setDateTime(this.currentDate.getDate(), this.currentDate.getMonth(), this.currentDate.getFullYear(),
-            this.currentDate.getHours(), this.currentDate.getMinutes(), this.currentDate.getSeconds());
+        const currentDate = new Date();
+        player.setDateTime(currentDate.getDate(), currentDate.getMonth(), currentDate.getFullYear(),
+            currentDate.getHours(), currentDate.getMinutes(), currentDate.getSeconds());
     }
 
     tempToCelsius(tempInKelvin){
@@ -99,18 +87,12 @@ export default class Weather {
         if(this.interval){
             clearInterval(this.interval);
         }
-        if(this.dateInterval){
-            clearInterval(this.dateInterval);
-        }
         alt.log('RealWeatherTimeSync: stopped');
     }
 
     startSync(){
         if(this.interval){
             clearInterval(this.interval);
-        }
-        if(this.dateInterval){
-            clearInterval(this.dateInterval);
         }
         this.initWeatherData();
         this.init();
