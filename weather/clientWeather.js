@@ -1,5 +1,5 @@
-import * as alt from 'alt';
+import * as alt from "alt-client";
 
-alt.on('connectionComplete', () => {
-    alt.setMsPerGameMinute(60000);
+alt.on("connectionComplete", () => {
+  alt.setMsPerGameMinute(60000);
 });
