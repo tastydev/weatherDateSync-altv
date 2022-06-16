@@ -6,14 +6,9 @@ export default class Weather {
     alt.log("~g~RealWeatherTimeSync: started");
     this.apiKey = apiKey;
     this.city = city;
-    this.url =
-      "https://api.openweathermap.org/data/2.5/weather?q=" +
-      this.city +
-      "," +
-      this.countryCode +
-      "&appid=" +
-      this.apiKey;
     this.countryCode = countryCode;
+    this.url = `https://api.openweathermap.org/data/2.5/
+    weather?q=${this.city},${this.countryCode}&appid=${this.apiKey}`;
     this.interval = null;
     this.currentWeatherData = {};
     this.currentWeatherType = 0;
@@ -35,7 +30,7 @@ export default class Weather {
       let json = await res.json();
       if (json !== undefined) {
         this.currentWeatherData = json;
-        this.currentWeatherType = await this.getWeatherType();
+        this.currentWeatherType = this.getWeatherType();
         this.syncNewData();
       } else {
         alt.log("Weather data couldn´t be updated");
@@ -87,10 +82,9 @@ export default class Weather {
   }
 
   syncNewData() {
-    if (alt.Player.all.length !== 0) {
-      alt.Player.all.forEach((player) => {
-        player.setWeather(this.currentWeatherType);
-      });
+    for (let player of alt.Player.all) {
+      player.setWeather(this.currentWeatherType);
+      this.setDate(player);
     }
   }
 

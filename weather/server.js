@@ -1,7 +1,7 @@
 import * as alt from "alt-server";
 import Weather from "./weather.js";
 
-let weatherSync = new Weather("YOUR-API-KEY", "Cologne", "DE");
+const weatherSync = new Weather("YOUR-API-KEY", "Cologne", "DE");
 
 alt.on("consoleCommand", (msg) => {
   switch (msg) {
