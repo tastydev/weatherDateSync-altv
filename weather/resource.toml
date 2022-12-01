@@ -1,0 +1,4 @@
+client-files = [ 'clientWeather.js' ]
+client-main = 'clientWeather.js'
+main = 'server.js'
+type = 'js'
