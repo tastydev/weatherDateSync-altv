@@ -91,7 +91,7 @@ export default class Weather {
   setDate(player) {
     const currentDate = new Date();
     player.setDateTime(
-      currentDate.getDate(),
+      currentDate.getDate() - 1,  //gta only supports day with 0-30 but js returns 1-31
       currentDate.getMonth(),
       currentDate.getFullYear(),
       currentDate.getHours(),
